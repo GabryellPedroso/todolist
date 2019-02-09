@@ -1,20 +1,26 @@
 <template lang="pug">
   div(id="app")
     Header
+    AddTodo(@addTodo="addTodo")
     
     div(id="container-todolist")
       TodoList(v-bind:todos="todos" @todoDelete="todoDelete")
+
+    p Made with love <3
+    p 2019
 </template>
 
 <script>
 import Header from './components/layout/Header'
+import AddTodo from './components/AddTodo'
 import TodoList from './components/TodoList'
 
 export default {
   name: 'app',
   components: {
-    TodoList,
-    Header
+    Header,
+    AddTodo,
+    TodoList
   },
   data() {
     return {
@@ -40,6 +46,12 @@ export default {
   methods: {
     todoDelete(id){
       this.todos = this.todos.filter(todo => todo.id !== id)
+    },
+    addTodo(new_todo){
+      this.todos = [
+        new_todo,
+        ...this.todos
+      ]
     }
   },
 }
@@ -63,10 +75,16 @@ body{
   margin: 10px;
   #container-todolist {
     padding: 10px 5px 0px;
+    margin-bottom: 25px;
     border: 1px solid #ccc;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     background-color: #fff;
+  }
+  p {
+    text-align: center;
+    color: #aaa;
+    font-size: .8em;
   }
 }
 .clear{
