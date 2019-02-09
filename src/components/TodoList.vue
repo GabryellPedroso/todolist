@@ -1,7 +1,7 @@
 <template lang="pug">
     div
         div(v-for="todo in todos")
-            TodoItem(v-bind:todo="todo")
+            TodoItem(v-bind:todo="todo" @todoDelete="$emit('todoDelete', todo.id)")
 </template>
 <script>
 import TodoItem from './TodoItem.vue'

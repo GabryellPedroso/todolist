@@ -1,21 +1,20 @@
 <template lang="pug">
   div(id="app")
-    div(id="container-logo")
-      img(id="logo" alt="Vue logo" src="./assets/logo.png" width="40px")
-      h1(id="title") Todo List
-      div.clear
+    Header
     
     div(id="container-todolist")
-      TodoList(v-bind:todos="todos")
+      TodoList(v-bind:todos="todos" @todoDelete="todoDelete")
 </template>
 
 <script>
+import Header from './components/layout/Header'
 import TodoList from './components/TodoList'
 
 export default {
   name: 'app',
   components: {
-    TodoList
+    TodoList,
+    Header
   },
   data() {
     return {
@@ -37,7 +36,12 @@ export default {
         },
       ],
     }
-  }
+  },
+  methods: {
+    todoDelete(id){
+      this.todos = this.todos.filter(todo => todo.id !== id)
+    }
+  },
 }
 </script>
 
@@ -46,6 +50,7 @@ export default {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  outline: none;
 }
 body{
   background-color: #fcfbff;
@@ -56,22 +61,6 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin: 10px;
-  #container-logo {
-    padding: 10px 10px 5px;
-    background-color: #222;
-    border: 1px solid #111;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    #logo{
-      float: left;
-    }
-    #title{
-      display: block;
-      color: #eee;
-      float: left;
-      margin-left: 15px;
-    }
-  }
   #container-todolist {
     padding: 10px 5px 0px;
     border: 1px solid #ccc;
