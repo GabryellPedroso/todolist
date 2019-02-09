@@ -61,6 +61,7 @@ export default {
         color: #c23616;
         font-weight: bold;
         font-size: .8em;
+        cursor: pointer;
         &:active{
             opacity: .5;
         }
